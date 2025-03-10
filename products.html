@@ -5,43 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品一覧 - はとあげマート</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel=”icon” href=“favicon.ico”>
     <link rel="icon" href="favicon.ico">
 </head>
 <body>
     <header>
-        <img src="main.png" alt="hatoage">
+        <div class="logo">HatoageMart</div>
         <nav>
-            <ul>
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="products.html">商品一覧</a></li>
-                <li><a href="#">お問い合わせ</a></li>
-            </ul>
+            <a href="index.html" class="btn">ホーム</a>
+            <a href="products.html" class="btn">商品一覧</a>
+            <a href="contact.html" class="btn">お問い合わせ</a>
         </nav>
     </header>
-
+    
     <main>
-        <section class="products">
-            <h2>商品一覧</h2>
-            <div class="product-list">
-                <li><a href="hatoage-small.html" class="product fade-in">
-                    <h3>はとあげ小</h3>
-                    <p>100g - 810円</p>
-                </a></li>
-             <li><a href="hatoage-large.html" class="product fade-in">
-                    <h3>はとあげ大</h3>
-                    <p>810g - 81000円</p>
-                </a></li>
-                <li><a href="hato.html" class="product fade-in">
-                    <h3>はと</h3>
-                    <p>810万円</p>
-                </a></li>
+        <h1 class="fade-in">商品一覧</h1>
+        <div class="product-list">
+            <div class="product fade-in">
+                <img src="hatoage_small.png" alt="はとあげ小">
+                <h2>はとあげ小 (100g)</h2>
+                <p>通常価格: 810円 → <span class="sale-price">153円</span> (81%オフ!)</p>
+                <li><a href="hatoage_small.html" class="btn">詳細を見る</a></li>
             </div>
-        </section>
+            <div class="product fade-in">
+                <img src="hatoage_large.png" alt="はとあげ大">
+                <h2>はとあげ大 (810g)</h2>
+                <p>通常価格: 81,000円 → <span class="sale-price">15,390円</span> (81%オフ!)</p>
+                <li><a href="hatoage_large.html" class="btn">詳細を見る</a></li>
+            </div>
+            <div class="product fade-in">
+                <img src="hato.png" alt="はと">
+                <h2>はと</h2>
+                <p>通常価格: 8,100,000円 → <span class="sale-price">1,539,000円</span> (81%オフ!)</p>
+                <li><a href="hato.html" class="btn">詳細を見る</a></li>
+            </div>
+        </div>
     </main>
-
+    
     <footer>
         <p>&copy; 2025 はとあげマート</p>
     </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
