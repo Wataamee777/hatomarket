@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>はとあげマート</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel=”icon” href=“favicon.ico”>
-
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <header>
-        <img src="main.png" alt="hatoage">
-
+        <div class="logo">
+            <img src="logo.png" alt="はとあげマート">
+        </div>
         <nav>
             <ul>
-                <li><a href="index.html">ホーム</a></li>
+                <li><a href="#">ホーム</a></li>
                 <li><a href="products.html">商品一覧</a></li>
                 <li><a href="#">お問い合わせ</a></li>
             </ul>
@@ -22,19 +22,25 @@
     </header>
 
     <main>
-    <section class="sale-banner">
-        <img src="sale.png" alt="開店セール！81%引き！">
-    </section>
+        <!-- コンセプト画像 -->
+        <div class="concept-image fade-in">
+            <img src="concept.png" alt="コンセプト画像">
+        </div>
 
-    <section class="intro">
-        <h2>ようこそ！はとあげマートへ</h2>
-        <p>美味しい「はとあげ」を販売する架空のコンビニです。</p>
-        <a href="products.html" class="button">商品一覧を見る</a>
-    </section>
-</main>
+        <!-- 81%引きセールの画像 -->
+        <div class="sale-banner fade-in">
+            <img src="sale.png" alt="ただいま開店セール！はと揚げ81%引き中！">
+        </div>
+
+        <section class="intro">
+            <h1>ようこそ！はとあげマートへ</h1>
+            <p>美味しい「はとあげ」を販売する架空のコンビニです。</p>
+            <a href="products.html" class="btn">商品一覧を見る</a>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2025 はとあげマート</p>
+        <p>© 2025 はとあげマート</p>
     </footer>
 </body>
 </html>
