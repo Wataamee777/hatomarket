@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>はとあげ小 - はとあげマート</title>
-    <link rel="stylesheet" href="styles.css">
-        <link rel=”icon” href=“favicon.ico”>
-、
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
-        <img src="main.png" alt="hatoage">
-        <nav>
-            <ul>
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="products.html">商品一覧</a></li>
-                <li><a href="#">お問い合わせ</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="product-detail">
-            <h2>はとあげ小</h2>
-            <img src="small.png" alt="はとあげ小の画像" class="product-image">
-            <p>100g - <span class="original-price">810円</span></p>
-            <p class="sale">今なら <span class="discounted-price">154円</span>！（81%引き）</p>
-            <p>おいしくカリッと揚げたはとの味わいをご堪能ください！</p>
-            <a href="products.html" class="back-button">← 商品一覧に戻る</a>
-        </section>
-    </main>
+<header>
+    <div class="logo"><img src="logo.png" alt="はとあげマート"></div>
+    <nav>
+        <ul>
+            <li><a href="https://hatoagemarket.wataamee777.f5.si/">ホーム</a></li>
+            <li><a href="products.html">商品一覧</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <footer>
-        <p>&copy; 2025 はとあげマート</p>
-    </footer>
+<main>
+    <div class="sale-banner fade-in">
+        <img src="sale.png" alt="81%引きセール">
+    </div>
+
+    <h1 class="fade-in">はとあげ小 (100g)</h1>
+    <p class="fade-in">通常価格: <s>810円</s> → セール価格: <strong>154円</strong></p>
+
+    <div class="product-images fade-in">
+        <img src="hatoage_small_1.png" alt="はとあげ小画像1">
+    </div>
+
+    <a href="products.html" class="btn fade-in">商品一覧に戻る</a>
+</main>
+
+<footer>
+    © 2025 はとあげマート
+</footer>
+
 </body>
 </html>
