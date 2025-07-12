@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>注文完了 - はとあげマーケット</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff8f0;
+      text-align: center;
+      padding: 50px;
+      color: #333;
+    }
+    a {
+      color: #f76f51;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>ご注文ありがとうございます！🐦</h1>
+  <p id="orderItem">注文内容を取得中...</p>
+  <a href="/">トップへ戻る</a>
+
+  <script>
+    // URLパラメータから item を取得して表示するだけ
+    const params = new URLSearchParams(window.location.search);
+    const item = params.get("item") || "不明な商品";
+
+    const itemMap = {
+      "hatage_small": "はとあげ Small",
+      "hatage_big": "はとあげ Big",
+      "hato_only": "はと単体"
+    };
+
+    const displayName = itemMap[item] || item;
+
+    document.getElementById("orderItem").textContent = `「${displayName}」を承りました！`;
+  </script>
+</body>
+</html>
