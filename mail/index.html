@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>はとあげマーケット - メール送信</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff8f0;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    input[type="email"] {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #f4a261;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e76f51;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📩 はとあげメールを送る</h1>
+  <p>メールアドレスを入力すると「はとあげいかがですか？」メールが届くよ！</p>
+
+  <form id="hatageForm">
+    <input type="email" id="emailInput" placeholder="メールアドレスを入力" required>
+    <button type="submit">送信</button>
+  </form>
+
+  <p id="result" style="margin-top: 30px; font-size: 16px;"></p>
+
+  <script>
+    const form = document.getElementById("hatageForm");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("emailInput").value;
+
+      result.textContent = "送信中...";
+
+      try {
+        const res = await fetch("https://script.google.com/macros/s/あなたのGASデプロイURL/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email: email })
+        });
+
+        const text = await res.text();
+        result.textContent = text;
+      } catch (err) {
+        result.textContent = "❌ エラーが発生しました：" + err;
+      }
+    });
+  </script>
+
+</body>
+</html>
