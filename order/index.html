@@ -29,11 +29,15 @@
     const item = params.get("item") || "不明な商品";
 
     const itemMap = {
-      "hatage_small": "はとあげ Small",
-      "hatage_big": "はとあげ Big",
-      "hato_only": "はと単体"
+      "hatoage_small": "はとあげプレーン味 Small",
+      "hatoage_big": "はとあげプレーン味 Big",
+      "hato_only": "はと単体",
+      "hatoage_spices_small": "はとあげスパイス味 Small",
+      "hatoage_spices_big": "はとあげスパイス味 Big",
+      "hatoage_cheese_small": "はとあげチーズ味 Small",
+      "hatoage_cheese_big": "はとあげチーズ味 Big"
     };
-
+    
     const displayName = itemMap[item] || item;
 
     document.getElementById("orderItem").textContent = `「${displayName}」を承りました！`;
