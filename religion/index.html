@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>はとあげ教 — ホーム</title>
+  <meta name="description" content="優しさを空に、笑顔を地に。はとあげ教公式サイト" />
+  <link rel="icon" href="/assets/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 共通ヘッダー -->
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="/">
+        <img src="/assets/logo.png" alt="はとあげ教ロゴ" />
+        <span>はとあげ教</span>
+      </a>
+      <nav class="nav">
+        <a href="/about">教義</a>
+        <a href="/events">活動</a>
+        <a href="/donate">寄付</a>
+        <a href="/contact">連絡</a>
+      </nav>
+      <button id="menuBtn" class="menu-btn" aria-label="メニュー">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1>はとを空に、はとあげを地に。</h1>
+        <p>はとあげ教は、日常の小さなはとあげを祝うコミュニティです。参加は自由 — 一緒に世界を揚げていこう。</p>
+        <div class="cta">
+          <a class="btn primary" href="/about">教義を見る</a>
+          <a class="btn" href="/events">活動を確認</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>注目イベント</h2>
+      <div id="homeEventList" class="card-grid"></div>
+    </section>
+
+    <section class="container section">
+      <h2>はとあげの3つの約束</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>はとをあげる</h3>
+          <p>最高級の油や小麦粉を使い、“はと”としてあげる文化。</p>
+        </div>
+        <div class="card">
+          <h3>揚げ方を育む</h3>
+          <p>互いの揚げ方を認め合い、揚げ合うコミュニティ。</p>
+        </div>
+        <div class="card">
+          <h3>日々の実践</h3>
+          <p>毎日1つ、小さなはとあげを意識して食べ続ける。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> はとあげ教 — すべての優しさに感謝を。</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
