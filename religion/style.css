@@ -15,11 +15,11 @@ html {
 }
 
 body {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Noto Sans JP", "Inter", sans-serif;
   background: var(--bg);
   color: var(--text);
   transition: background 0.3s, color 0.3s;
-  line-height: 1.6;
+  line-height: 1.7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,19 +27,19 @@ body {
 
 /* ===== テーマ変数 ===== */
 body[data-theme="light"] {
-  --bg: #fafafa;
+  --bg: #f9fafb;
   --text: #111;
   --accent: #2563eb;
   --card-bg: #fff;
-  --header-bg: rgba(255, 255, 255, 0.85);
+  --header-bg: rgba(255, 255, 255, 0.9);
 }
 
 body[data-theme="dark"] {
   --bg: #0f172a;
-  --text: #f1f5f9;
+  --text: #e2e8f0;
   --accent: #3b82f6;
   --card-bg: #1e293b;
-  --header-bg: rgba(15, 23, 42, 0.85);
+  --header-bg: rgba(15, 23, 42, 0.9);
 }
 
 /* ===== ヘッダー ===== */
@@ -49,27 +49,27 @@ header {
   left: 0;
   width: 100%;
   background: var(--header-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.8rem 2rem;
   z-index: 100;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 header.scrolled {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 header img.logo {
-  height: 40px;
+  height: 42px;
   width: auto;
 }
 
 nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.4rem;
 }
 
 nav a {
@@ -88,7 +88,7 @@ nav a::after {
   width: 0%;
   height: 2px;
   background: var(--accent);
-  transition: width 0.3s;
+  transition: width 0.25s ease;
 }
 
 nav a:hover::after,
@@ -97,30 +97,37 @@ nav a.active::after {
 }
 
 #theme-toggle {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   cursor: pointer;
   border: none;
   background: none;
   color: var(--text);
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 #theme-toggle:hover {
   transform: rotate(15deg);
 }
 
-/* ===== メイン ===== */
+/* ===== 本文 ===== */
 main {
   flex: 1;
-  padding: 6rem 2rem 3rem;
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  padding: 7rem 1.5rem 3rem; /* ← これでヘッダー分の余白確保 */
   animation: fadeIn 0.6s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== セクションカード ===== */
@@ -128,32 +135,35 @@ main {
   background: var(--card-bg);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
   margin-bottom: 2rem;
 }
 
 .section-card h2 {
-  margin-bottom: 1rem;
   color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.section-card p {
+  font-size: 1.05rem;
 }
 
 /* ===== ボタン ===== */
-button,
-a.button {
-  display: inline-block;
+a.button,
+button {
   background: var(--accent);
   color: #fff;
   font-weight: 600;
-  border: none;
   padding: 0.8rem 1.6rem;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s;
+  border: none;
   text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
 }
 
-button:hover,
-a.button:hover {
+a.button:hover,
+button:hover {
   background: #1d4ed8;
   transform: translateY(-2px);
 }
@@ -161,9 +171,11 @@ a.button:hover {
 /* ===== フッター ===== */
 footer {
   text-align: center;
-  padding: 1rem;
+  padding: 1.5rem;
   font-size: 0.9rem;
   opacity: 0.8;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  margin-top: auto;
 }
 
 /* ===== スマホ対応 ===== */
@@ -171,13 +183,20 @@ footer {
   header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
   }
+
   nav {
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 0.5rem;
   }
+
   main {
-    padding: 7rem 1.2rem 3rem;
+    padding: 8rem 1rem 3rem;
+  }
+
+  .section-card {
+    padding: 1.5rem;
   }
 }
