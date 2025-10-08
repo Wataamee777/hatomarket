@@ -1,5 +1,6 @@
 /* ======================================
-   はとあげ教 公式サイト CSS スライドメニュー対応版
+   はとあげ教 公式サイト CSS 強化版
+   スライドメニュー対応
    Author: わたあめえ
    ====================================== */
 
@@ -11,7 +12,7 @@ body {
   background: var(--bg);
   color: var(--text);
   transition: background 0.3s,color 0.3s;
-  line-height: 1.7;
+  line-height:1.7;
   min-height:100vh;
   display:flex;
   flex-direction:column;
@@ -23,7 +24,6 @@ body[data-theme="light"]{
   --text:#111;
   --accent:#2563eb;
   --card-bg:#fff;
-  --header-bg:rgba(255,255,255,0.92);
   --btn-hover:#1e40af;
 }
 body[data-theme="dark"]{
@@ -31,67 +31,48 @@ body[data-theme="dark"]{
   --text:#e2e8f0;
   --accent:#3b82f6;
   --card-bg:#1e293b;
-  --header-bg:rgba(15,23,42,0.92);
   --btn-hover:#2563eb;
 }
 
-/* ===== ヘッダー ===== */
-header {
+/* ===== スライドメニュー ===== */
+.side-menu {
   position: fixed;
-  top:0; left:0;
-  width:100%;
-  height:60px;
-  background: var(--header-bg);
-  backdrop-filter: blur(15px);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 1.5rem;
-  z-index:300;
-  border-bottom:1px solid rgba(128,128,128,0.1);
-}
-
-header img.logo{ height:42px; transition: transform 0.3s; }
-header img.logo:hover{ transform: scale(1.05) rotate(-2deg); }
-
-.menu-btn{
-  font-size:1.8rem;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:var(--text);
-  z-index:350;
-}
-
-/* ===== サイドメニュー ===== */
-.side-menu{
-  position:fixed;
-  top:0;
-  left:-250px;
-  width:250px;
-  height:100%;
-  background: var(--card-bg);
-  box-shadow:2px 0 12px rgba(0,0,0,0.2);
-  padding:3rem 1.5rem;
+  top:0; left:-280px;
+  width:280px; height:100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+  backdrop-filter: blur(20px);
+  box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+  padding:4rem 2rem 2rem;
   display:flex;
   flex-direction:column;
-  gap:1.5rem;
-  transition:left 0.3s ease;
+  gap:1.8rem;
+  transition: left 0.35s cubic-bezier(0.77,0,0.175,1);
   z-index:200;
 }
 
-.side-menu.open{ left:0; }
-.side-menu a{
+.side-menu.open { left:0; }
+
+.side-menu a {
   text-decoration:none;
   color: var(--text);
-  font-weight:600;
-  font-size:1.1rem;
-  transition: color 0.2s;
+  font-weight:700;
+  font-size:1.2rem;
+  padding:0.5rem 0;
+  border-radius:8px;
+  transition: all 0.3s ease;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
 }
-.side-menu a:hover{ color: var(--accent); }
+
+.side-menu a:hover {
+  color: var(--accent);
+  background: rgba(0,0,0,0.05);
+  padding-left:0.8rem;
+}
 
 /* ===== オーバーレイ ===== */
-.overlay{
+.overlay {
   position: fixed;
   top:0; left:0;
   width:100%; height:100%;
@@ -101,27 +82,45 @@ header img.logo:hover{ transform: scale(1.05) rotate(-2deg); }
   transition: opacity 0.3s;
   z-index:150;
 }
-.overlay.active{
-  opacity:1;
-  visibility:visible;
+.overlay.active { opacity:1; visibility:visible; }
+
+/* ===== ハンバーガーボタン ===== */
+.menu-btn {
+  font-size:1.8rem;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: var(--text);
+  z-index:250;
+  position: fixed;
+  top:16px;
+  left:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:48px; height:48px;
+  border-radius:50%;
+  transition: background 0.2s, transform 0.2s;
 }
+.menu-btn:hover { background: rgba(0,0,0,0.05); transform: scale(1.1); }
 
 /* ===== 本文 ===== */
-main{
+main {
   flex:1;
   width:100%;
   max-width:960px;
   margin:0 auto;
-  padding: calc(60px + 3rem) 1.5rem 4rem;
+  padding:3rem 1.5rem 4rem;
   animation: fadeIn 0.6s ease;
+  transition: margin-left 0.3s ease;
 }
 
 /* ===== セクション ===== */
-.container{ width:100%; margin:0 auto; padding:0 1rem; }
-.section{ margin-bottom:3rem; }
+.container { width:100%; margin:0 auto; padding:0 1rem; }
+.section { margin-bottom:3rem; }
 
 /* ===== カード ===== */
-.card, .section-card{
+.card, .section-card {
   background: var(--card-bg);
   padding:2rem;
   border-radius:14px;
@@ -129,20 +128,20 @@ main{
   margin-bottom:2.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.card:hover, .section-card:hover{
+.card:hover, .section-card:hover {
   transform: translateY(-4px);
   box-shadow:0 12px 28px rgba(0,0,0,0.18);
 }
-.card h3, .section-card h2{ color: var(--accent); margin-bottom:1rem; }
-.card p, .section-card p{ font-size:1.05rem; }
+.card h3, .section-card h2 { color: var(--accent); margin-bottom:1rem; }
+.card p, .section-card p { font-size:1.05rem; }
 
 /* ===== ヒーロー ===== */
-.hero{ text-align:center; padding:3rem 1rem; }
-.hero h1{ font-size:2rem; margin-bottom:1rem; }
-.hero p{ font-size:1.1rem; margin-bottom:2rem; }
+.hero { text-align:center; padding:3rem 1rem; }
+.hero h1 { font-size:2rem; margin-bottom:1rem; }
+.hero p { font-size:1.1rem; margin-bottom:2rem; }
 
 /* ===== ボタン ===== */
-a.btn, button{
+a.btn, button {
   display:inline-block;
   background: var(--accent);
   color:#fff;
@@ -154,14 +153,14 @@ a.btn, button{
   transition: all 0.3s ease, box-shadow 0.3s;
   margin-right:0.5rem;
 }
-a.btn:hover, button:hover{
+a.btn:hover, button:hover {
   background: var(--btn-hover);
   transform: translateY(-2px) scale(1.02);
   box-shadow:0 8px 18px rgba(0,0,0,0.2);
 }
 
 /* ===== フッター ===== */
-footer{
+footer {
   text-align:center;
   padding:2rem 1rem;
   font-size:0.9rem;
@@ -171,13 +170,13 @@ footer{
 }
 
 /* ===== フェードイン ===== */
-@keyframes fadeIn{
-  from{ opacity:0; transform: translateY(12px);}
-  to{ opacity:1; transform: translateY(0);}
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(12px); }
+  to { opacity:1; transform: translateY(0); }
 }
 
 /* ===== カードグリッド ===== */
-.card-grid{
+.card-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:1.5rem;
@@ -185,9 +184,9 @@ footer{
 
 /* ===== レスポンシブ ===== */
 @media (max-width:768px){
-  header{ flex-direction:row; justify-content:space-between; padding:0 1rem; }
-  main{ padding: calc(60px + 4rem) 1rem 3rem; }
-  .card, .section-card{ padding:1.8rem; }
-  .hero h1{ font-size:1.7rem; }
-  .hero p{ font-size:1rem; }
+  main { padding:4rem 1rem 3rem; }
+  .card, .section-card { padding:1.8rem; }
+  .hero h1 { font-size:1.7rem; }
+  .hero p { font-size:1rem; }
+  .side-menu { width:240px; padding:3rem 1.5rem; }
 }
