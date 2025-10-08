@@ -38,48 +38,47 @@ jobs:
           git fetch --all --prune
 
       - name: Prepare backup branch
+        id: prepare_branch
         run: |
           set -e
-          echo "バックアップブランチを使用: $BACKUP_BRANCH"
-          # Create or reset local backup branch to origin/main
-          # If origin/main exists, base the backup branch on it to avoid using working-tree changes.
-          git checkout -B "$BACKUP_BRANCH" origin/main || git checkout -B "$BACKUP_BRANCH"
-          # Now the local $BACKUP_BRANCH matches main (local HEAD is main)
+          echo "Using backup branch: $BACKUP_BRANCH"
+          # Create or reset local backup branch to origin/main (or to current HEAD if origin/main missing)
+          if git show-ref --verify --quiet "refs/remotes/origin/main"; then
+            git checkout -B "$BACKUP_BRANCH" origin/main
+          else
+            git checkout -B "$BACKUP_BRANCH"
+          fi
 
-      - name: Check if backup on remote is already up-to-date
-        id: check_up_to_date
-        run: |
-          set -e
-          REMOTE_BRANCH="origin/$BACKUP_BRANCH"
+          # Check whether remote backup branch exists and compare SHAs
           if git ls-remote --exit-code --heads origin "$BACKUP_BRANCH" >/dev/null 2>&1; then
-            echo "リモートバックアップブランチが存在します: $REMOTE_BRANCH"
+            echo "リモートバックアップブランチが存在します: origin/$BACKUP_BRANCH"
             LOCAL_SHA=$(git rev-parse HEAD)
-            REMOTE_SHA=$(git rev-parse "$REMOTE_BRANCH")
+            REMOTE_SHA=$(git rev-parse "origin/$BACKUP_BRANCH")
             echo "ローカル=$LOCAL_SHA"
             echo "リモート=$REMOTE_SHA"
             if [ "$LOCAL_SHA" = "$REMOTE_SHA" ]; then
-              echo "最新です。" >> "$GITHUB_OUTPUT"
-              echo "main と $BACKUP_BRANCH; の間に変更はありません。プッシュをスキップします。"
-              exit 0
+              echo "up_to_date=true" >> "$GITHUB_OUTPUT"
+              echo "main と $BACKUP_BRANCH の間に変更なし。プッシュをスキップします。"
+            else
+              echo "up_to_date=false" >> "$GITHUB_OUTPUT"
             fi
           else
-            echo "リモート バックアップ ブランチはまだ存在しません。新しいブランチをプッシュします。"
+            echo "up_to_date=false" >> "$GITHUB_OUTPUT"
+            echo "リモートバックアップブランチが存在しないため、新規プッシュします。"
           fi
-          echo "最新ではありません。" >> "$GITHUB_OUTPUT"
 
       - name: Push backup branch to origin
-        if: steps.check_up_to_date.outputs.up_to_date != 'true' || env.FORCE_PUSH == 'true'
+        if: steps.prepare_branch.outputs.up_to_date != 'true' || env.FORCE_PUSH == 'true'
         run: |
           set -e
-          echo "$BACKUP_BRANCH を origin にプッシュしています"
+          echo "Pushing $BACKUP_BRANCH to origin"
           if [ "$FORCE_PUSH" = "true" ]; then
-            # Force-with-lease is safer than --force
             git push origin "$BACKUP_BRANCH" --force-with-lease
           else
             git push origin "$BACKUP_BRANCH"
           fi
 
       - name: Skip push (already up-to-date)
-        if: steps.check_up_to_date.outputs.up_to_date == 'true'
+        if: steps.prepare_branch.outputs.up_to_date == 'true'
         run: |
-          echo "バックアップはすでに最新です。何もする必要はありません。"
+          echo "バックアップは既に最新です。何もすることがありません。"
