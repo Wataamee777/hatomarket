@@ -1,5 +1,5 @@
 /* ======================================
-   はとあげ教 公式サイト CSS 強化版
+   はとあげ教 公式サイト CSS フル版
    Author: わたあめえ
    ====================================== */
 
@@ -15,23 +15,23 @@ html {
 }
 
 body {
-  font-family: "Noto Sans JP", "Inter", sans-serif;
+  font-family: "Noto Sans JP","Inter",sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s,color 0.3s;
   line-height: 1.7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* ===== テーマ変数 ===== */
+/* ===== テーマ ===== */
 body[data-theme="light"] {
   --bg: #f9fafb;
   --text: #111;
   --accent: #2563eb;
   --card-bg: #fff;
-  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-bg: rgba(255,255,255,0.92);
   --btn-hover: #1e40af;
 }
 
@@ -40,7 +40,7 @@ body[data-theme="dark"] {
   --text: #e2e8f0;
   --accent: #3b82f6;
   --card-bg: #1e293b;
-  --header-bg: rgba(15, 23, 42, 0.92);
+  --header-bg: rgba(15,23,42,0.92);
   --btn-hover: #2563eb;
 }
 
@@ -57,7 +57,7 @@ header {
   justify-content: space-between;
   padding: 1rem 2rem;
   z-index: 100;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  border-bottom: 1px solid rgba(128,128,128,0.1);
   transition: all 0.3s ease;
 }
 
@@ -67,7 +67,6 @@ header.scrolled {
 
 header img.logo {
   height: 42px;
-  width: auto;
   transition: transform 0.3s;
 }
 
@@ -86,7 +85,6 @@ nav a {
   font-weight: 600;
   position: relative;
   padding-bottom: 4px;
-  transition: color 0.2s;
 }
 
 nav a::after {
@@ -106,6 +104,7 @@ nav a.active::after {
   width: 100%;
 }
 
+/* ===== テーマ切替ボタン ===== */
 #theme-toggle {
   font-size: 1.4rem;
   cursor: pointer;
@@ -125,38 +124,64 @@ main {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: calc(var(--header-height, 70px) + 3rem) 1.5rem 4rem;
+  padding: calc(var(--header-height,70px)+3rem) 1.5rem 4rem;
   animation: fadeIn 0.6s ease;
 }
 
-/* ===== セクションカード ===== */
-.section-card {
+/* ===== セクション ===== */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+/* ===== カード ===== */
+.card, .section-card {
   background: var(--card-bg);
-  padding: 2.2rem;
+  padding: 2rem;
   border-radius: 14px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   margin-bottom: 2.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.section-card:hover {
+.card:hover, .section-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(0,0,0,0.18);
 }
 
-.section-card h2 {
+.card h3, .section-card h2 {
   color: var(--accent);
   margin-bottom: 1rem;
-  font-size: 1.5rem;
 }
 
-.section-card p {
-  font-size: 1.08rem;
+.card p, .section-card p {
+  font-size: 1.05rem;
+}
+
+/* ===== ヒーローセクション ===== */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
 
 /* ===== ボタン ===== */
-a.button,
-button {
+a.btn, button {
+  display: inline-block;
   background: var(--accent);
   color: #fff;
   font-weight: 600;
@@ -164,12 +189,11 @@ button {
   border-radius: 10px;
   border: none;
   text-decoration: none;
-  display: inline-block;
   transition: all 0.3s ease, box-shadow 0.3s;
+  margin-right: 0.5rem;
 }
 
-a.button:hover,
-button:hover {
+a.btn:hover, button:hover {
   background: var(--btn-hover);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 18px rgba(0,0,0,0.2);
@@ -181,7 +205,7 @@ footer {
   padding: 2rem 1rem;
   font-size: 0.9rem;
   opacity: 0.85;
-  border-top: 1px solid rgba(128, 128, 128, 0.15);
+  border-top: 1px solid rgba(128,128,128,0.15);
   margin-top: auto;
 }
 
@@ -191,22 +215,35 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== スマホ対応 ===== */
+/* ===== カードグリッド ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 1.5rem;
+}
+
+/* ===== レスポンシブ ===== */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6rem;
-    padding: 1rem 1.2rem;
+    padding: 1rem 1rem;
   }
   nav {
     flex-wrap: wrap;
     gap: 1rem;
   }
   main {
-    padding: calc(var(--header-height, 70px) + 4rem) 1rem 3rem;
+    padding: calc(var(--header-height,70px)+4rem) 1rem 3rem;
   }
-  .section-card {
+  .card, .section-card {
     padding: 1.8rem;
+  }
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+  .hero p {
+    font-size: 1rem;
   }
 }
