@@ -1,0 +1,85 @@
+name: Sync main to backup (Wataamee777)
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-main-to-backup-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BACKUP_BRANCH: backup-Wataamee777
+  # Set to "true" to always force push; "false" to skip push when no changes.
+  FORCE_PUSH: "false"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Ensure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch all refs
+        run: |
+          git fetch --all --prune
+
+      - name: Prepare backup branch
+        run: |
+          set -e
+          echo "Using backup branch: $BACKUP_BRANCH"
+          # Create or reset local backup branch to origin/main
+          # If origin/main exists, base the backup branch on it to avoid using working-tree changes.
+          git checkout -B "$BACKUP_BRANCH" origin/main || git checkout -B "$BACKUP_BRANCH"
+          # Now the local $BACKUP_BRANCH matches main (local HEAD is main)
+
+      - name: Check if backup on remote is already up-to-date
+        id: check_up_to_date
+        run: |
+          set -e
+          REMOTE_BRANCH="origin/$BACKUP_BRANCH"
+          if git ls-remote --exit-code --heads origin "$BACKUP_BRANCH" >/dev/null 2>&1; then
+            echo "Remote backup branch exists: $REMOTE_BRANCH"
+            LOCAL_SHA=$(git rev-parse HEAD)
+            REMOTE_SHA=$(git rev-parse "$REMOTE_BRANCH")
+            echo "local=$LOCAL_SHA"
+            echo "remote=$REMOTE_SHA"
+            if [ "$LOCAL_SHA" = "$REMOTE_SHA" ]; then
+              echo "up_to_date=true" >> "$GITHUB_OUTPUT"
+              echo "No changes between main and $BACKUP_BRANCH; skipping push."
+              exit 0
+            fi
+          else
+            echo "Remote backup branch does not exist yet; will push new branch."
+          fi
+          echo "up_to_date=false" >> "$GITHUB_OUTPUT"
+
+      - name: Push backup branch to origin
+        if: steps.check_up_to_date.outputs.up_to_date != 'true' || env.FORCE_PUSH == 'true'
+        run: |
+          set -e
+          echo "Pushing $BACKUP_BRANCH to origin"
+          if [ "$FORCE_PUSH" = "true" ]; then
+            # Force-with-lease is safer than --force
+            git push origin "$BACKUP_BRANCH" --force-with-lease
+          else
+            git push origin "$BACKUP_BRANCH"
+          fi
+
+      - name: Skip push (already up-to-date)
+        if: steps.check_up_to_date.outputs.up_to_date == 'true'
+        run: |
+          echo "Backup is already up-to-date; nothing to do."
