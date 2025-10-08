@@ -109,13 +109,13 @@ nav a.active::after {
   transform: rotate(15deg);
 }
 
-/* ===== 本文 ===== */
+/* 本文エリア（自動でヘッダー分の高さ調整） */
 main {
   flex: 1;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 7rem 1.5rem 3rem; /* ← これでヘッダー分の余白確保 */
+  padding: calc(var(--header-height, 70px) + 2rem) 1.5rem 3rem;
   animation: fadeIn 0.6s ease;
 }
 
