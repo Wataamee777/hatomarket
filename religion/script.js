@@ -4,6 +4,17 @@
 
 // DOM読み込み後
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== ヘッダー高さをmainに反映 =====
+const header = document.querySelector("header");
+const updateHeaderHeight = () => {
+  if (header) {
+    document.documentElement.style.setProperty("--header-height", `${header.offsetHeight}px`);
+  }
+};
+window.addEventListener("resize", updateHeaderHeight);
+window.addEventListener("load", updateHeaderHeight);
+updateHeaderHeight();
+
   const body = document.body;
   const navLinks = document.querySelectorAll("nav a");
   const themeToggle = document.querySelector("#theme-toggle");
