@@ -1,9 +1,9 @@
 /* ======================================
-   はとあげ教 公式サイト CSS
+   はとあげ教 公式サイト CSS 強化版
    Author: わたあめえ
    ====================================== */
 
-/* ===== ベース設定 ===== */
+/* ===== ベース ===== */
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +31,8 @@ body[data-theme="light"] {
   --text: #111;
   --accent: #2563eb;
   --card-bg: #fff;
-  --header-bg: rgba(255, 255, 255, 0.9);
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --btn-hover: #1e40af;
 }
 
 body[data-theme="dark"] {
@@ -39,7 +40,8 @@ body[data-theme="dark"] {
   --text: #e2e8f0;
   --accent: #3b82f6;
   --card-bg: #1e293b;
-  --header-bg: rgba(15, 23, 42, 0.9);
+  --header-bg: rgba(15, 23, 42, 0.92);
+  --btn-hover: #2563eb;
 }
 
 /* ===== ヘッダー ===== */
@@ -49,27 +51,33 @@ header {
   left: 0;
   width: 100%;
   background: var(--header-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(15px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.8rem 2rem;
+  padding: 1rem 2rem;
   z-index: 100;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
   transition: all 0.3s ease;
 }
 
 header.scrolled {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 
 header img.logo {
   height: 42px;
   width: auto;
+  transition: transform 0.3s;
+}
+
+header img.logo:hover {
+  transform: scale(1.05) rotate(-2deg);
 }
 
 nav {
   display: flex;
-  gap: 1.4rem;
+  gap: 1.6rem;
 }
 
 nav a {
@@ -77,18 +85,20 @@ nav a {
   color: var(--text);
   font-weight: 600;
   position: relative;
+  padding-bottom: 4px;
   transition: color 0.2s;
 }
 
 nav a::after {
   content: "";
   position: absolute;
-  bottom: -4px;
-  left: 0;
+  bottom: 0;
+  left: 50%;
   width: 0%;
   height: 2px;
   background: var(--accent);
-  transition: width 0.25s ease;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 nav a:hover::after,
@@ -97,55 +107,51 @@ nav a.active::after {
 }
 
 #theme-toggle {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   cursor: pointer;
   border: none;
   background: none;
   color: var(--text);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 }
 
 #theme-toggle:hover {
-  transform: rotate(15deg);
+  transform: rotate(20deg);
 }
 
-/* 本文エリア（自動でヘッダー分の高さ調整） */
+/* ===== 本文 ===== */
 main {
   flex: 1;
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: calc(var(--header-height, 70px) + 2rem) 1.5rem 3rem;
+  padding: calc(var(--header-height, 70px) + 3rem) 1.5rem 4rem;
   animation: fadeIn 0.6s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ===== セクションカード ===== */
 .section-card {
   background: var(--card-bg);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  margin-bottom: 2rem;
+  padding: 2.2rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  margin-bottom: 2.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.section-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
 }
 
 .section-card h2 {
   color: var(--accent);
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .section-card p {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
 }
 
 /* ===== ボタン ===== */
@@ -154,49 +160,53 @@ button {
   background: var(--accent);
   color: #fff;
   font-weight: 600;
-  padding: 0.8rem 1.6rem;
-  border-radius: 8px;
+  padding: 0.85rem 1.8rem;
+  border-radius: 10px;
   border: none;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, box-shadow 0.3s;
 }
 
 a.button:hover,
 button:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
+  background: var(--btn-hover);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
 }
 
 /* ===== フッター ===== */
 footer {
   text-align: center;
-  padding: 1.5rem;
+  padding: 2rem 1rem;
   font-size: 0.9rem;
-  opacity: 0.8;
-  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  opacity: 0.85;
+  border-top: 1px solid rgba(128, 128, 128, 0.15);
   margin-top: auto;
 }
 
+/* ===== フェードイン ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== スマホ対応 ===== */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6rem;
-    padding: 0.8rem 1rem;
+    padding: 1rem 1.2rem;
   }
-
   nav {
     flex-wrap: wrap;
     gap: 1rem;
   }
-
   main {
-    padding: 8rem 1rem 3rem;
+    padding: calc(var(--header-height, 70px) + 4rem) 1rem 3rem;
   }
-
   .section-card {
-    padding: 1.5rem;
+    padding: 1.8rem;
   }
 }
