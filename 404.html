@@ -108,50 +108,6 @@
         <li><a href="https://discord.gg/B8rHDMug8P" target="_blank" rel="noopener noreferrer">Discordで問い合わせ</a></li>
       </ul>
     </section>
-
-    <section class="popular-products" aria-label="人気商品">
-      <h3>人気の商品</h3>
-      <ul class="product-list" style="display:flex;gap:1rem;flex-wrap:wrap;list-style:none;padding:0;">
-        <!-- サンプル：静的に表示。必要なら動的に差し替え -->
-        <li style="width:160px;">
-          <a href="/products/hato-age-1">
-            <img src="/assets/products/hato-age-1-thumb.jpg" alt="はとあげA" width="160" height="120" loading="lazy">
-            <p>はとあげA</p>
-            <small>¥150</small>
-          </a>
-        </li>
-        <li style="width:160px;">
-          <a href="/products/hato-age-2">
-            <img src="/assets/products/hato-age-2-thumb.jpg" alt="はとあげB" width="160" height="120" loading="lazy">
-            <p>はとあげB</p>
-            <small>¥180</small>
-          </a>
-        </li>
-        <li style="width:160px;">
-          <a href="/products/hato-age-3">
-            <img src="/assets/products/hato-age-3-thumb.jpg" alt="はとあげC" width="160" height="120" loading="lazy">
-            <p>はとあげC</p>
-            <small>¥200</small>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <section class="report-broken" aria-label="壊れたリンクの報告">
-      <h3>このページが見つからないことを報告する</h3>
-      <p>こちらから壊れたリンクを管理者に通知できます。送信される情報：現在のURL、参照元、追加のコメント。</p>
-      <form id="report-form" method="post" action="/report-broken-link" style="max-width:520px;">
-        <input type="hidden" name="broken_url" id="broken_url" value="">
-        <input type="hidden" name="referrer" id="referrer" value="">
-        <label for="report-comment">追記事項（任意）</label><br>
-        <textarea id="report-comment" name="comment" rows="3" style="width:100%;" placeholder="例：リンク元はトップページのバナーでした"></textarea>
-        <div style="margin-top:0.5em;">
-          <button type="submit" class="btn">報告する</button>
-          <button type="button" id="report-send-ajax" class="btn" style="margin-left:0.5em;">非同期で報告（推奨）</button>
-        </div>
-      </form>
-      <p id="report-result" aria-live="polite" style="margin-top:0.5em;"></p>
-    </section>
   </main>
 
   <footer role="contentinfo">
