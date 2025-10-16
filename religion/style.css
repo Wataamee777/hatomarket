@@ -21,7 +21,7 @@ body {
 /* ===== テーマ ===== */
 body[data-theme="light"]{
   --bg:#f9fafb;
-  --text:#111;
+  --text:#000;
   --accent:#2563eb;
   --card-bg:#fff;
   --btn-hover:#1e40af;
