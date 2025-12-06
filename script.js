@@ -13,3 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("scroll", checkVisibility);
     checkVisibility();
 });
+
+const newUrl = "https://discord.gg/sakuraza-tan-wang-guo-sakura-talk-kingdom-1208962938388484107";
+const linkElement = document.getElementById("invitelink");
+linkElement.href = newUrl;
